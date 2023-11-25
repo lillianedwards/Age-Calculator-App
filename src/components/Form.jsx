@@ -50,10 +50,97 @@ function Form() {
     e.preventDefault();
 
     if (!days) {
-      
+      setInvalidDays("Required input");
+      invalid = true;
+    } else if (days > numberOfDays[String(months)] || days > 31) {
+      setInvalidDays("Must be a valid day.");
+      flagInvalid = true;
+    } else {
+      setInvalidDays("")
     }
+
+    if (!months) {
+      setInvalidMonths("Required input");
+      invalid = true;
+    } else if (months > 12) {
+      setInvalidMonths("Must be a valid month");
+      invalid = true;
+    } else if (months === 2) {
+      if ((leapYear(years) && days > 29) || (!leapYear(years) && days > 28)) {
+        setInvalidDays("Must be a valid day.");
+        invalid = true;
+      }
+    } else {
+      setInvalidMonths("");
+    }
+
+    const currentDate = new Date();
+
+    if (!years) {
+      setInvalidYears("Required input");
+      invalid = true;
+    } else if (years > currentDate.getFullYear()) {
+      setInvalidYears("Must be in the past.");
+      invalid = true;
+    } else {
+      setInvalidYears("");
+    }
+
+    const birthday = new Date(`${years}-${months}-${days}`);
+
+    if (birthday > currentDate) {
+      setInvalidDays("Must be in the past.");
+      setInvalidMonths("Must be in the past.");
+      setInvalidYears("Must be in the past.");
+      invalid = true;
+    }
+
+    if (invalid === true) return;
+
+
+    let resultYears = currentDate.getFullYear() - birthday.getFullYear();
+    let resultMonths = currentDate.getMonth() - birthday.getMonth();
+    let resultDays = currentDate.getDate() - birthday.getDate();
+
+    if (resultDays < 0) {
+      resultMonths--;
+      const lastMonthDays = new Date(currentDate.getFullYear(), currentDate.getMonth(), 0).getDate();
+      resultDays += lastMonthDays;
+    }
+
+    if (resultMonths < 0) {
+      resultYears--;
+      resultMonths += 12;
+    }
+
+    setInvalidDays(false);
+    setInvalidMonths(false);
+    setInvalidYears(false);
+
+    setResultYears(resultYears);
+    setResultMonths(resultMonths);
+    setResultDays(resultDays);
+
+  }
+// ensures that the "Day" input field in the age calculator form is updated based on user input, but it also includes checks to handle specific cases, such as ignoring the input if a period (.) is entered and ensuring that the state is updated with a valid numeric value. 
+
+  const handleDays = (e) => {
+    if (e.nativeEvent.data === ".") return;
+    let value = e.target.value;
+    setDays(() => (isNaN(value) ? days : Number(value)));
   }
 
+  const handleMonths = (e) => {
+    if (e.nativeEvent.data === ".") return;
+    let value = e.target.value;
+    setMonths(() => (isNan(value) ? months : Number(value)));
+  }
+
+  const handleYears = (e) => {
+    if (e.nativeEvent.data === ".") return;
+    let value = e.target.value;
+    setYears(() => (isNan(value) ? years : Number(value)));
+  }
 
   return (
     <div>

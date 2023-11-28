@@ -28,21 +28,21 @@ function CalcForm() {
   const [months, setMonths] = useState("");
   const [years, setYears] = useState("");
 
-  const [resultDays, setResultDays] = useState("__");
-  const [resultMonths, setResultMonths] = useState("__");
-  const [resultYears, setResultYears] = useState("__");
+  const [resultDays, setResultDays] = useState("_");
+  const [resultMonths, setResultMonths] = useState("_");
+  const [resultYears, setResultYears] = useState("_");
 
   const [invalidDays, setInvalidDays] = useState("");
   const [invalidMonths, setInvalidMonths] = useState("");
   const [invalidYears, setInvalidYears] = useState("");
 
-  //allowing the dayField value to be set to null initally
-  // const dayField = useRef(null);
+  // allowing the dayField value to be set to null initally
+  const dayField = useRef(null);
 
-  // //useEffect will run after the intial render and place the cursor in the day field for smoother user experience and direction
-  // useEffect(() => {
-  //   window.addEventListener("load", () => dayField.current.focus());
-  // }, []);
+  //useEffect will run after the intial render and place the cursor in the day field for smoother user experience and direction
+  useEffect(() => {
+    window.addEventListener("load", () => dayField.current.focus());
+  }, []);
 
   const handleSubmit = (e) => {
     let invalid = false;
@@ -131,16 +131,16 @@ function CalcForm() {
     setDays(() => (isNaN(value) ? days : Number(value)));
   };
 
-  const handleMonths = (e) => {
+ const handleMonths = (e) => {
     if (e.nativeEvent.data === ".") return;
     let value = e.target.value;
-    setMonths(() => (isNan(value) ? months : Number(value)));
+    setMonths(() => (isNaN(value) ? months : Number(value)));
   };
 
   const handleYears = (e) => {
     if (e.nativeEvent.data === ".") return;
     let value = e.target.value;
-    setYears(() => (isNan(value) ? years : Number(value)));
+    setYears(() => (isNaN(value) ? years : Number(value)));
   };
 
 
@@ -149,54 +149,32 @@ function CalcForm() {
 
   return (
     <div id="app">
+      
       <form id="container" onSubmit={handleSubmit}>
         <div className="inputContain">
-          <InputGroup
-            field="Day"
-            type="text"
-            value={days}
-            onChange={handleDays}
-            placeholder="DD"
-            size="lg"
-          >
-            <Form.Control
-              aria-label="Large"
-              aria-describedby="inputGroup-sizing-sm"
-            />
-          </InputGroup>
+          <InputContainer field="Day" validityState={invalidDays}>
+          <input ref={dayField} type='text' value={days} 
+          onChange={handleDays} placeholder='DD'
+          />
+          </InputContainer>
 
-          <InputGroup 
-          field="Month"
-          type="text"
-          value={months}
-          onChange={handleDays}
-          placeholder="MM"
-          size="lg"
-          >
-            <Form.Control
-              aria-label="Large"
-              aria-describedby="inputGroup-sizing-sm"
-            />
-          </InputGroup>
+          <InputContainer field="Month" validityState={invalidMonths}>
+          <input type='text' value={months} 
+          onChange={handleMonths} placeholder='MM'
+          />
+          </InputContainer>
 
-          <InputGroup 
-          field="Year"
-          type="text"
-          value={years}
-          onChange={handleYears}
-          placeholder="YYYY"
-          size="lg"
-          >
-            <Form.Control
-              aria-label="Large"
-              aria-describedby="inputGroup-sizing-sm"
-            />
-          </InputGroup>
+          <InputContainer field="Year" validityState={invalidYears}>
+          <input type='text' value={years} 
+          onChange={handleYears} placeholder='YYYY'
+          />
+          </InputContainer>
+
         </div>
 
       <Btn/>
 
-      <div>
+      <div className="resultContain">
         <Result field="years" result={resultYears}/>
         <Result field="months" result={resultMonths}/>
         <Result field="days" result={resultDays}/>

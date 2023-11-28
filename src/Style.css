@@ -23,20 +23,94 @@
 body {
   height: 100vh;
   display: flex;
-  justify-content: center;
-
 }
+
 #app {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  margin-top: 15%
 }
-
 #container {
   background-color: var(--white);
-  transform: translate(-50% -50%);
   border-radius: 8px 8px 142px 8px;
   width: 355px;
   padding: 24px;
+  
+}
 
+@media (min-width: 660px) {
+  #container {
+    width: 520px;
+}
+input {
+  width: 140px;
+}
+}
+
+@media (min-width: 1440px) {
+  #container {
+    width: 600px;
+  }
+  input{
+    width: 180px;
+  }
+}
+
+.inputContain {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--smokey-gray);
+}
+
+input {
+  padding: 8px 16px;
+  width: 100px;
+  outline: none;
+  border: 1px solid var(--light-grey);
+  border-radius: 8px;
+  font-size: 1.6rem;
+  caret-color: var(--purple);
+}
+
+input:focus {
+  border-color: var(--purple);
+}
+
+input::placeholder {
+  font-weight: 700;
+  color: var(--light-grey)
+}
+
+p {
+  font-size: 2.8rem;
+  font-style: italic;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+p > span {
+  color: var(--purple);
+  font-size: inherit;
+}
+
+small {
+  display: block;
+  font-size: 0.8rem;
+}
+
+.invalid label, small {
+  color: var(--light-red);
+}
+
+.invalid small {
+  display: block;
 }

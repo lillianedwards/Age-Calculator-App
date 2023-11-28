@@ -16,13 +16,27 @@
   box-sizing: border-box;
   font-size: 62.5%;
   font-family: 'Poppins', sans-serif;
+  background-color: var(--off-white);
+  width: 100%;
 }
 
 body {
   height: 100vh;
-  background-color: var(--off-white);
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  
+
+}
+#app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#container {
+  background-color: var(--white);
+  transform: translate(-50% -50%);
+  border-radius: 8px 8px 142px 8px;
+  width: 355px;
+  padding: 24px;
+
 }

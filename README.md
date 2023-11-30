@@ -6,7 +6,7 @@ It's often fun to know exactly how old you are, in months and days. How many mor
  To install the age calculator app on your local environment clone the github repo and run "npm i" to install dependencies. 
 
  ## Screenshots 📸
- ![alt text](../Age-Calculator-App/src/assets/images/screenshot.png)
+ ![Screenshot](../Age-Calculator-App/src/assets/images/screenshot.png)
 
 ## Credits 💳
 I worked on the project alone but received the design from Frontend Mentor. 

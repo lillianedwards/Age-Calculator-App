@@ -206,8 +206,8 @@ function InputContainer ({ field, validityState, children}) {
 
 function Btn() {
   return (
-    <div>
-      <button>
+    <div className="buttonContain">
+      <button id="button">
         <img src="src/assets/images/icon-arrow.svg" alt="arrow-submit" />
       </button>
     </div>
@@ -216,7 +216,7 @@ function Btn() {
 
 function Attribution() {
   return (
-    <div>
+    <div className="attribution">
       Challenge by <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>. Coded by {' '}
       <a href="https://github.com/lillianedwards">Lillian Edwards</a>.{' '}
     </div>

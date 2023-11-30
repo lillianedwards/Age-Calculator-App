@@ -114,3 +114,51 @@ small {
 .invalid small {
   display: block;
 }
+
+.invalid input {
+  border-color: var(--light-red);
+}
+
+#button {
+  color: var(--white);
+  border-radius: 50%;
+  border: none;
+  background-color: var(--purple);
+  transition: 250ms linear;
+  cursor: pointer;
+  padding: 10px;
+}
+
+
+
+#button:hover {
+  background-color: var(--off-black);
+}
+
+.buttonContain {
+position: relative;
+text-align: right;
+padding-right: 20px;
+}
+
+.buttonContain::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+  z-index: -1;
+  height: 1px;
+  width: 100%;
+  background-color: var(--light-grey);
+}
+
+.attribution {
+  font-size: 0.8rem;
+  margin-top: 20px;
+}
+
+.attribution a {
+  color: hsl(228, 45%, 44%)
+}
